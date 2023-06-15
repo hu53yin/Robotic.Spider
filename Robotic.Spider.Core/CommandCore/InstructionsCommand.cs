@@ -15,7 +15,7 @@ namespace Robotic.Spider.Core.CommandCore
         {
             if (!string.IsNullOrEmpty(command) && !string.IsNullOrWhiteSpace(command))
             {
-                var result = new Result();
+                Result? result = null;
 
                 foreach (char letter in command)
                 {
@@ -62,8 +62,8 @@ namespace Robotic.Spider.Core.CommandCore
 
                 return new Result
                 {
-                    IsSuccess = result.IsSuccess,
-                    Description = result.Description,
+                    IsSuccess = result != null ? result.IsSuccess : true,
+                    Description = result?.Description,
                     Value = spider,
                 };
             }

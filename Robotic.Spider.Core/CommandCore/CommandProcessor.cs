@@ -8,11 +8,11 @@ namespace Robotic.Spider.Core.CommandCore
     /// </summary>
     public class CommandProcessor : ICommandProcessor
     {
-        private readonly ICommand wallCommand;
-        private readonly ICommand locationCommand;
-        private readonly ICommand instructionsCommand;
+        private readonly ICommand? wallCommand;
+        private readonly ICommand? locationCommand;
+        private readonly ICommand? instructionsCommand;
 
-        public CommandProcessor(ICommand wallCommand, ICommand locationCommand, ICommand instructionsCommand)
+        public CommandProcessor(ICommand? wallCommand, ICommand? locationCommand, ICommand? instructionsCommand)
         {
             this.wallCommand = wallCommand;
             this.locationCommand = locationCommand;
@@ -21,17 +21,17 @@ namespace Robotic.Spider.Core.CommandCore
 
         public Result ProcessWallCommand(string command)
         {
-            return wallCommand.Extract(command);
+            return wallCommand?.Extract(command)!;
         }
 
         public Result ProcessLocationCommand(string command, ISpider spider)
         {
-            return locationCommand.Extract(command, spider);
+            return locationCommand?.Extract(command, spider)!;
         }
 
         public Result ProcessInstructionsCommand(string command, ISpider spider)
         {
-            return instructionsCommand.Extract(command, spider);
+            return instructionsCommand?.Extract(command, spider)!;
         }
     }
 }

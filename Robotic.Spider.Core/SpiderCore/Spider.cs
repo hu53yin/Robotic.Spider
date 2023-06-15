@@ -1,6 +1,7 @@
 ﻿using Robotic.Spider.Core.Helper;
 using Robotic.Spider.Core.WallCore;
 using System.Drawing;
+using System.Globalization;
 using static Robotic.Spider.Core.Helper.Variable;
 
 namespace Robotic.Spider.Core.SpiderCore
@@ -33,11 +34,11 @@ namespace Robotic.Spider.Core.SpiderCore
         /// <summary>
         /// Wall dimensions
         /// </summary>
-        private IDimension dimension;
+        public IDimension Dimension { get; }
 
         public Spider(IDimension dimension)
         {
-            this.dimension = dimension;
+            this.Dimension = dimension;
         }
 
         /// <summary>
@@ -68,7 +69,9 @@ namespace Robotic.Spider.Core.SpiderCore
 
         public override string ToString()
         {
-            return string.Format("{0} {1} {2}", Coordinate.X, Coordinate.Y, Face.ToString());
+            string capitalizedDirection = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(Face.ToString().ToLower());
+
+            return string.Format("{0} {1} {2}", Coordinate.X, Coordinate.Y, capitalizedDirection);
         }
 
         /// <summary>
@@ -80,7 +83,7 @@ namespace Robotic.Spider.Core.SpiderCore
             switch (Face)
             {
                 case Faces.UP:
-                    if (coordinate.Y < dimension.YDimension)
+                    if (coordinate.Y < Dimension.YDimension)
                     {
                         coordinate.Y++;
                     }
@@ -89,12 +92,12 @@ namespace Robotic.Spider.Core.SpiderCore
                         return new Result
                         {
                             IsSuccess = false,
-                            Description = string.Format("FORWARD Command discarded! Y Dimension reached {0}", dimension.YDimension)
+                            Description = string.Format("FORWARD Command discarded! Y Dimension reached {0}", Dimension.YDimension)
                         };
                     }
                     break;
                 case Faces.RIGHT:
-                    if (coordinate.X < dimension.XDimension)
+                    if (coordinate.X < Dimension.XDimension)
                     {
                         coordinate.X++;
                     }
@@ -103,7 +106,7 @@ namespace Robotic.Spider.Core.SpiderCore
                         return new Result
                         {
                             IsSuccess = false,
-                            Description = string.Format("FORWARD Command discarded! X Dimension reached {0}", dimension.YDimension)
+                            Description = string.Format("FORWARD Command discarded! X Dimension reached {0}", Dimension.YDimension)
                         };
                     }
                     break;

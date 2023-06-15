@@ -14,5 +14,7 @@
         /// Y dimension
         /// </summary>
         int YDimension { get; }
+
+        bool Equals(object obj);
     }
 }

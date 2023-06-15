@@ -1,4 +1,5 @@
 ﻿using Robotic.Spider.Core.Helper;
+using Robotic.Spider.Core.WallCore;
 using System.Drawing;
 using static Robotic.Spider.Core.Helper.Variable;
 
@@ -16,6 +17,11 @@ namespace Robotic.Spider.Core.SpiderCore
         /// Spider's coordinate (x,y)
         /// </summary>
         Point Coordinate { get; set; }
+
+        /// <summary>
+        /// Dimension info
+        /// </summary>
+        IDimension Dimension { get; }
 
         /// <summary>
         /// Spider can turn left

@@ -1,5 +1,6 @@
 ﻿using Robotic.Spider.Core.Helper;
 using Robotic.Spider.Core.SpiderCore;
+using System.Drawing;
 using static Robotic.Spider.Core.Helper.Variable;
 
 namespace Robotic.Spider.Core.CommandCore
@@ -22,14 +23,25 @@ namespace Robotic.Spider.Core.CommandCore
                     int.TryParse(commandParts[1], out int yDimension) && 
                     Enum.TryParse(commandParts[2].ToUpper(), out Faces face))
                 {
-                    spider!.Coordinate = new System.Drawing.Point(xDimension, yDimension);
-                    spider.Face = face;
-
-                    return new Result
+                    if(xDimension <= spider!.Dimension.XDimension && yDimension <= spider!.Dimension.YDimension)
                     {
-                        IsSuccess = true,
-                        Value = spider,
-                    };
+                        spider!.Coordinate = new Point(xDimension, yDimension);
+                        spider.Face = face;
+
+                        return new Result
+                        {
+                            IsSuccess = true,
+                            Value = spider,
+                        };
+                    }   
+                    else
+                    {
+                        return new Result
+                        {
+                            IsSuccess = false,
+                            Description = "The given location exceeded the wall limits.",
+                        };
+                    }
                 }
             }
 
