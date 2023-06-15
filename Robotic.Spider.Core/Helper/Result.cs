@@ -17,6 +17,10 @@
         /// </summary>
         public string? Description { get; set; }
 
+        /// <summary>
+        /// Command execution result value
+        /// It gives a result value.
+        /// </summary>
         public object? Value { get; set; }
     }
 }

@@ -15,6 +15,11 @@
         /// </summary>
         int YDimension { get; }
 
+        /// <summary>
+        /// Equality check
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         bool Equals(object obj);
     }
 }
